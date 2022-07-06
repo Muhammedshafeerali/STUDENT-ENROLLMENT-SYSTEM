@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="col-lg-3">
+
+</div>
+<div class="col-lg-6">
+    <h2 class="text-center"><u>ADD STUDENT</u></h2>
+    <form class="pt-5" method="POST" id="stdform"  role="form" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <div class="row">
+                <div class="col-lg-4 pt-2">
+                    <label for="StudentCode ">Student Code</label>
+                </div>
+                <div class="col-lg-2">
+                    <label for="StudentCode ">:</label>
+                </div>
+                <div class="col-lg-6">
+                    <input type="text" class="form-control" id="StudentCode" disabled>
+                </div>
+            <!-- --- -->
+                <div class="col-lg-4 pt-2">
+                    <label for="name ">Full Name</label>
+                </div>
+                <div class="col-lg-2 pt-2" >
+                    <label for="name ">:</label>
+                </div>
+                <div class="col-lg-6 pt-2">
+                    <input type="text" class="form-control" id="FullName" name="FullName" >
+                </div>
+
+
+            <!--  -->
+                <div class="col-lg-4 pt-2">
+                    <label for="name ">Phone No</label>
+                </div>
+                <div class="col-lg-2 pt-2" >
+                    <label for="name ">:</label>
+                </div>
+                <div class="col-lg-6 pt-2">
+                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" >
+                </div>
+
+            <!--  -->
+
+                <div class="col-lg-4 pt-2">
+                    <label for="name ">Email</label>
+                </div>
+                <div class="col-lg-2 pt-2" >
+                    <label for="name ">:</label>
+                </div>
+                <div class="col-lg-6 pt-2">
+                    <input type="email" class="form-control" id="email" name="email" >
+                </div>
+
+            <!--  -->
+            <div class="col-lg-4 pt-2">
+                <label for="state ">State</label>
+            </div>
+            <div class="col-lg-2 pt-2" >
+                <label for="state ">:</label>
+            </div>
+            <div class="col-lg-6 pt-2">
+                <select class="form-control" id="State" name="State">
+                    <option value="0">Please Select</option>
+                    {% for i in state %}
+                    <option value="{{i.state}}">{{i.state}}</option>
+                  {% endfor %}
+                </select>
+            </div>
+
+        <!--  -->
+        <div class="col-lg-4 pt-2">
+            <label for="state ">District</label>
+        </div>
+        <div class="col-lg-2 pt-2" >
+            <label for="state ">:</label>
+        </div>
+        <div class="col-lg-6 pt-2">
+            <select class="form-control" id="District" name="District">
+                <option value="0">Please Select</option>
+                
+              </select>
+        </div>
+
+
+    <!--  -->
+            <div class="col-lg-4 pt-2">
+                    <label for="profile image">Profile Image</label>
+                </div>
+                <div class="col-lg-2 pt-2" >
+                    <label for="profile image">:</label>
+                </div>
+                <div class="col-lg-6 pt-2">
+                    <input type="file" class="form-control-file" id="image" name="image" required>
+                </div>
+
+
+            </div>
+            <!--  -->
+            
+        </div>
+
+</div>
+<div class="form-group pt-5 text-center">
+    <button type="submit"  class="submit btn btn-primary">Submit</a>
+</div>
+
+</form>
+</div>
+
+<style>
+    .error {
+      color: red;
+   }
+</style>
+<script>
+    $(document).ready(function() {
+     
+        
+        $(".submit").click(function(e){
+            
+            var validate=0
+            
+            $("span").each(function(){
+                $(this).remove();
+            })
+
+            if($("#FullName").val().length >16 ){
+                $('#FullName').after("<span class='phoneNumber validationMessage' style='color:red;'>Maximum 16 characters</span>")
+                validate=1
+            }
+            if($("#FullName").val().length ==0 ){
+                $('#FullName').after("<span class='phoneNumber validationMessage' style='color:red;'>Please Enter the name</span>")
+                validate=1
+            }
+            var phonenu =$("#phoneNumber").val()
+            var regx = /^[6-9]\d{9}$/ ;
+            if(regx.test(phonenu)==false){
+                $('#phoneNumber').after("<span class='phoneNumber validationMessage' style='color:red;'>Please enter 10 digit phone number</span>")
+                validate=1
+            }
+             
+            email=$("#email").val()
+            var emailregx = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if(emailregx.test(email)==false){
+                $('#email').after("<span class='phoneNumber validationMessage' style='color:red;'>Wrong Mail id</span>")
+                validate=1
+            }
+             
+
+            if ($('option:selected',$("#State")).attr('value')=='0'){
+                $('#State').after("<span class='phoneNumber validationMessage' style='color:red;'>Please Select State</span>")
+                
+            }
+
+            if ($('option:selected',$("#District")).attr('value')=='0'){
+                $('#District').after("<span class='phoneNumber validationMessage' style='color:red;'>Please Select District</span>")
+                validate=1
+            }
+            
+            
+            if ($('input:file')[0].files.length === 0) {
+                $("input:file").after("<span class='phoneNumber validationMessage' style='color:red;'>Please add  Profile image</span>")
+                validate=1
+            }
+            if (validate == 1){
+                e.preventDefault()
+            }
+            else{
+                alert("Data Saved Success Fully")
+            }
+            
+            
+        });
+
+        $("#State").on("change",function(e){
+            state=$('option:selected',$(this)).val()
+            $.ajax({
+                url:"/getdistrict/",
+                type:"GET",
+                data:{
+                    'state':state
+                },
+                success:function(data){
+                    if(data){
+                        options=['<option value="0">Please Select</option>']
+                        $.each(data.district,function(i,item){
+                            options.push(`<option value="${item}">${item}</option>`)
+                        })
+                        $("#District").html(options)
+                    }
+                    else{
+                        alert("no-district")
+                    }
+                }
+            })
+        })
+    })
+    </script>
+{% endblock %}

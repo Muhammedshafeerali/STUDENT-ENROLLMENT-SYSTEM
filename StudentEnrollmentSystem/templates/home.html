@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    
+<div class="logo-content position-absolute">
+    <!-- <a type="button" class="btn btn-outline-primary btn-block ">Primary</a><br><br> -->
+    <h1 class="text-center pt-2">logo</h1>
+    
+</div>
+
+<div class="col-lg-12">
+
+<div class="button-content mid-center position-absolute">
+    <a type="button" href="/addstudent/" class="btn btn-outline-primary btn-block btn-size">ADD STUDENT</a><br><br>
+
+    <a type="button" href="/viewstudents/" class="btn btn-outline-secondary btn-block btn-size">VIEW STUDENTS</a>
+</div>
+</div>
+<style>
+    .logo-content{
+        width: 200px;
+            height: 100px;
+            border: 2px solid #000000;
+           left: 2%;
+           top: 2%;
+          
+
+    }
+    .btn-size{
+        width:500px;
+    }
+    .mid-center {
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+    /* .button-content {
+        width: 300px;
+        height: 300px;
+        border: 1px solid #ff8899;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    } */
+</style
+{% endblock %}
+    

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<br>
+<div class="searchbox pt-3">
+    <input  id="myInput" type="text" placeholder="Search Phone Number.." style=" width: 195px;">
+</div>
+
+<div class="table" id="stdtable">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Emai</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            
+            {% for data in students %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{data.fullName}}</td>
+                <td>{{data.phoneNumber}}</td>
+                <td>{{data.email}}</td>
+                <td><a href="{{data.stdcode}}/">View</a></td>
+              </tr>
+
+            {% endfor %}
+                
+          
+         
+        </tbody>
+      </table>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val()
+            $("#stdtable tr").filter(function() {
+             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        })
+
+    })
+</script>
+
+{% endblock %}
+    

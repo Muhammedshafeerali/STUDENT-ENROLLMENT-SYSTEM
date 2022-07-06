@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load %}
+
+{% block content %}
+<div class="col-lg-3 pt-5">
+    <img src="{{student.image.url}}" width="150" height="150" alt="Prfile image">
+</div>
+<div class="col-lg-6 pt-5">
+
+
+    <div class="pt-5">
+        <div class="row pt-5">
+
+            <!-- --- -->
+            <div class="col-lg-4 pt-2">
+                <label for="name ">Full Name</label>
+            </div>
+            <div class="col-lg-2 pt-2">
+                <label for="name ">:</label>
+            </div>
+            <div class="col-lg-6 pt-2">
+                <label for="StudentCode ">{{student.fullName}}</label>
+            </div>
+
+
+            <!--  -->
+            <div class="col-lg-4 pt-2">
+                <label for="name ">Phone No</label>
+            </div>
+            <div class="col-lg-2 pt-2">
+                <label for="name ">:</label>
+            </div>
+            <div class="col-lg-6 pt-2">
+                <label for="StudentCode ">{{student.phoneNumber}}</label>
+            </div>
+
+            <!--  -->
+
+            <div class="col-lg-4 pt-2">
+                <label for="name ">Email</label>
+            </div>
+            <div class="col-lg-2 pt-2">
+                <label for="name ">:</label>
+            </div>
+            <div class="col-lg-6 pt-2">
+                <label for="StudentCode ">{{student.email}}</label>
+            </div>
+
+            <!--  -->
+            <div class="col-lg-4 pt-2">
+                <label for="state ">State</label>
+            </div>
+            <div class="col-lg-2 pt-2">
+                <label for="state ">:</label>
+            </div>
+            <div class="col-lg-6 pt-2">
+                <label for="StudentCode ">{{student.state}}</label>
+
+            </div>
+
+            <!--  -->
+            <div class="col-lg-4 pt-2">
+                <label for="state ">District</label>
+            </div>
+            <div class="col-lg-2 pt-2">
+                <label for="state ">:</label>
+            </div>
+            <div class="col-lg-6 pt-2">
+                <label for="StudentCode ">{{student.district}}</label>
+
+            </div>
+
+
+            <!--  -->
+
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="col-lg-2 pt-5 align-items-right">
+    <a type="button" href="/viewstudents/" class="btn btn-link"><svg xmlns="http://www.w3.org/2000/svg" width="100" height="50" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+      </svg></a>
+</div>
+
+<style>
+    img {
+  border: 5px solid #555;
+}
+</style>
+{% endblock %}
